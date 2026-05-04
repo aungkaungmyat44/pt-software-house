@@ -93,7 +93,7 @@ window.addEventListener('DOMContentLoaded', event => {
             });
 
             const recipientEmail = (contactForm.dataset.recipientEmail || '').trim();
-            const recipientConfigured = recipientEmail && recipientEmail !== 'ptsoftwarehouse@gmail.com';
+            const recipientConfigured = recipientEmail;
 
             if (hasInvalidField || !recipientConfigured) {
                 setMessageVisibility(errorMessage, true);
@@ -115,14 +115,14 @@ window.addEventListener('DOMContentLoaded', event => {
                 message
             ].join('\n');
 
-            const mailtoUrl = `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             if (submitButton) {
                 submitButton.disabled = true;
             }
 
             setMessageVisibility(successMessage, true);
-            window.location.href = mailtoUrl;
+            window.open(gmailComposeUrl, '_blank');
 
             window.setTimeout(() => {
                 contactForm.reset();
